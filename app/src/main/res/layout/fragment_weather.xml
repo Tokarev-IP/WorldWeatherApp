@@ -1,0 +1,152 @@
+git init<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".mvvm.WeatherFragment"
+    android:orientation="vertical"
+    >
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_scrollFlags="scroll|snap"
+            android:layout_marginBottom="5dp"
+            android:paddingHorizontal="10dp"
+            >
+
+            <Button
+                android:id="@+id/hour_button"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="@string/today"
+                android:backgroundTint="@color/purple_500"
+                android:layout_marginEnd="10dp"
+                />
+
+            <Button
+                android:id="@+id/day_button"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="@string/week"
+                android:backgroundTint="@color/purple_500"
+                android:layout_marginEnd="10dp"
+                />
+
+            <Spinner
+                android:id="@+id/city_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:backgroundTint="@color/purple_700"
+                android:entries="@array/cities"
+                />
+
+        </LinearLayout>
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="10dp"
+            android:background="@color/white"
+            app:layout_scrollFlags="scroll|enterAlways"
+            >
+            
+            <TextView
+                android:id="@+id/city_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/time_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/city_textView"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/sunrise_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/sunset_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sunrise_textView"
+                />
+
+            <TextView
+                android:id="@+id/temp_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/city_textView"
+                />
+
+            <TextView
+                android:id="@+id/feelsLike_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_textView"
+                />
+
+            <ImageView
+                android:id="@+id/weather_imageView"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                app:layout_constraintStart_toEndOf="@id/temp_textView"
+                app:layout_constraintTop_toTopOf="@id/temp_textView"
+                />
+
+            <TextView
+                android:id="@+id/windSpeed_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/feelsLike_textView"
+                />
+
+            <TextView
+                android:id="@+id/humidity_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/windSpeed_textView"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+        
+        <androidx.recyclerview.widget.RecyclerView 
+            android:id="@+id/weather_recyclerView" 
+            android:layout_width="match_parent" 
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -6,7 +6,8 @@
     <string-array name="cities">
         <item>My location</item>
         <item>Moscow</item>
-        <item>Saint Peterburg</item>
+        <item>Saint Petersburg</item>
+        <item>Sochi</item>
         <item>Novosibirsk</item>
         <item>Krasnoyarsk</item>
         <item>Irkutsk</item>
@@ -16,7 +17,7 @@
         <item>Paris</item>
         <item>Rome</item>
         <item>Madrid</item>
-        <item>Barcelona</item>
+        <item>Cape Town</item>
         <item>Tokyo</item>
         <item>Shanghai</item>
         <item>Hong Kong</item>
@@ -25,9 +26,9 @@
         <item>New York</item>
         <item>Chicago</item>
         <item>Los Angeles</item>
-        <item>Dallas</item>
+        <item>Mexico City</item>
         <item>Vancouver</item>
-        <item>Rio de Janeiro</item>
+        <item>Sao Paulo</item>
         <item>Buenos Aires</item>
     </string-array>
 </resources>

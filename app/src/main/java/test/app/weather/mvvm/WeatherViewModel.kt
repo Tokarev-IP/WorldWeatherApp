@@ -8,10 +8,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import test.app.weather.api.ApiClientObject
 import test.app.weather.api.ApiResponse
+import test.app.weather.api.data.CityData
+import test.app.weather.api.data.CityDescription
+import java.util.*
 
 class WeatherViewModel: ViewModel() {
 
     private var weatherData: MutableLiveData<ApiResponse> = MutableLiveData()
+    private val cityDiscription = CityDescription()
+
+    fun setCities(): LinkedList<CityData> {
+        viewModelScope.launch(Dispatchers.IO) {
+            cityDiscription.setData()
+        }
+        return cityDiscription.getCityData()
+    }
 
     fun getWeatherData() = weatherData
 

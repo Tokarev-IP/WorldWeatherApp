@@ -1,4 +1,4 @@
-git init<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -58,7 +58,7 @@ git init<?xml version="1.0" encoding="utf-8"?>
             android:paddingHorizontal="10dp"
             android:paddingVertical="10dp"
             android:background="@color/white"
-            app:layout_scrollFlags="scroll|enterAlways"
+            app:layout_scrollFlags="scroll|snap"
             >
             
             <TextView
@@ -73,25 +73,23 @@ git init<?xml version="1.0" encoding="utf-8"?>
                 android:id="@+id/time_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/city_textView"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/city_textView"
                 />
 
             <TextView
                 android:id="@+id/sunrise_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal|center_vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/humidity_textView"
                 />
 
             <TextView
                 android:id="@+id/sunset_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal|center_vertical"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/sunrise_textView"
                 />
 
@@ -99,26 +97,25 @@ git init<?xml version="1.0" encoding="utf-8"?>
                 android:id="@+id/temp_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal|center_vertical"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/city_textView"
+                app:layout_constraintTop_toBottomOf="@id/time_textView"
                 />
 
             <TextView
                 android:id="@+id/feelsLike_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal|center_vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/temp_textView"
                 />
 
             <ImageView
                 android:id="@+id/weather_imageView"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                app:layout_constraintStart_toEndOf="@id/temp_textView"
-                app:layout_constraintTop_toTopOf="@id/temp_textView"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="100dp"
                 />
 
             <TextView

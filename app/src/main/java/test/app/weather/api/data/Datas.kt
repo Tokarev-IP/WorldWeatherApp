@@ -58,3 +58,7 @@ data class FeelsLikeTempData(
     @SerializedName("morn")
     var morning: Float,
 )
+
+enum class Time{
+    HOURS, DAYS
+}

@@ -67,6 +67,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:textSize="18sp"
+                android:textColor="@color/black"
                 />
 
             <TextView
@@ -99,6 +101,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/time_textView"
+                android:textSize="18sp"
+                android:textColor="@color/black"
                 />
 
             <TextView
@@ -132,6 +136,17 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/windSpeed_textView"
+                />
+
+            <TextView
+                android:id="@+id/hours_days_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sunset_textView"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:gravity="center_horizontal"
                 />
 
 

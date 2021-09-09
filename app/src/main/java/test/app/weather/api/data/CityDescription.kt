@@ -8,8 +8,8 @@ class CityDescription {
 
     fun setData(){
         cityData.add(CityData("Moscow",55.75F , 37.62F,"GMT+3"))
-        cityData.add(CityData("SPB",59.84F , 30.31F,"GMT+3"))
-        cityData.add(CityData("Sochi",43.60F , 39.73F,"GMT+3"))
+        cityData.add(CityData("Kaliningrad",54.72F , 20.52F,"GMT+2"))
+        cityData.add(CityData("Samara",53.20F , 50.14F,"GMT+4"))
         cityData.add(CityData("Novosibirsk",55.04F , 82.93F,"GMT+7"))
         cityData.add(CityData("Krasnoyarsk",56.02F , 92.87F,"GMT+7"))
         cityData.add(CityData("Irkutsk",52.30F , 104.3F,"GMT+8"))

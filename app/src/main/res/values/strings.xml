@@ -6,8 +6,8 @@
     <string-array name="cities">
         <item>My location</item>
         <item>Moscow</item>
-        <item>Saint Petersburg</item>
-        <item>Sochi</item>
+        <item>Kaliningrad</item>
+        <item>Samara</item>
         <item>Novosibirsk</item>
         <item>Krasnoyarsk</item>
         <item>Irkutsk</item>

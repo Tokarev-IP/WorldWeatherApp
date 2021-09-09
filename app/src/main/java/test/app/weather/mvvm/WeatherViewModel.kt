@@ -10,12 +10,21 @@ import test.app.weather.api.ApiClientObject
 import test.app.weather.api.ApiResponse
 import test.app.weather.api.data.CityData
 import test.app.weather.api.data.CityDescription
+import test.app.weather.api.data.Time
 import java.util.*
 
 class WeatherViewModel: ViewModel() {
 
     private var weatherData: MutableLiveData<ApiResponse> = MutableLiveData()
     private val cityDiscription = CityDescription()
+    private var time = Time.HOURS
+    private val weatherRep = WeatherRepository()
+
+    fun getTime() = time
+
+    fun setTime(dataTime: Time){
+        time = dataTime
+    }
 
     fun setCities(): LinkedList<CityData> {
         viewModelScope.launch(Dispatchers.IO) {
@@ -29,13 +38,7 @@ class WeatherViewModel: ViewModel() {
     fun getData(lat: Float, lon: Float){
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val data = ApiClientObject.apiClient.getWeatherInCity(
-                    lat,
-                    lon,
-                    "metric",
-                    "minutely,alerts",
-                    "1b916d803de90495c5dba70b809a0aee"
-                )
+                val data = weatherRep.getDataFromApi(lat,lon)
                 weatherData.postValue(data)
 
                 Log.d("API", data.toString())

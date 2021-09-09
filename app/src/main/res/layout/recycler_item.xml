@@ -15,6 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center_horizontal"
+        android:textSize="15sp"
+        android:textColor="@color/black"
         />
 
     <TextView
@@ -48,12 +50,96 @@
         app:layout_constraintEnd_toStartOf="@id/weather_image_recycler"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="18sp"
+        android:textColor="@color/black"
         />
 
     <ImageView
         android:id="@+id/weather_image_recycler"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+
+    <TextView
+        android:id="@+id/time_textView_recycler_days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_horizontal"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/windSpeed_textView_recycler_days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/weather_image_recycler_days"
+        app:layout_constraintTop_toBottomOf="@id/time_textView_recycler_days"
+        />
+
+    <TextView
+        android:id="@+id/humidity_textView_recycler_days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/weather_image_recycler_days"
+        app:layout_constraintTop_toBottomOf="@id/windSpeed_textView_recycler_days"
+        />
+
+    <TextView
+        android:id="@+id/pop_textView_recycler_days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/weather_image_recycler_days"
+        app:layout_constraintTop_toBottomOf="@id/humidity_textView_recycler_days"
+        />
+
+    <TextView
+        android:id="@+id/temp_morning_textView_recycler_days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/time_textView_recycler_days"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/temp_day_textView_recycler_days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/temp_morning_textView_recycler_days"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/temp_evening_textView_recycler_days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/temp_day_textView_recycler_days"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/temp_night_textView_recycler_days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/temp_evening_textView_recycler_days"
+        android:textColor="@color/black"
+        />
+
+    <ImageView
+        android:id="@+id/weather_image_recycler_days"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

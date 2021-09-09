@@ -5,10 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import test.app.weather.MyApplication
 import test.app.weather.R
 import test.app.weather.api.ApiResponse
-import test.app.weather.api.data.CurrentData
 import test.app.weather.api.data.DailyData
 import test.app.weather.api.data.HourlyData
 import test.app.weather.api.data.Time
@@ -19,16 +17,15 @@ import kotlin.properties.Delegates
 @SuppressLint("SimpleDateFormat")
 class WeatherAdapter: RecyclerView.Adapter<WeatherVH>() {
 
+    lateinit var apiResponseData: ApiResponse
     private var weatherData: List<HourlyData> = emptyList()
     private var weatherDaysData: List<DailyData> = emptyList()
     private val dataFormat = SimpleDateFormat("HH:mm dd.MM.yyyy")
     private val dataFormatDays = SimpleDateFormat("dd.MM.yyyy")
     private var time = Time.HOURS
-    private var timeZoneString = "GMT+3"
-    var layout by Delegates.notNull<Int>()
+    var gmt by Delegates.notNull<Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherVH {
-        dataFormat.timeZone = TimeZone.getTimeZone(timeZoneString)
 
         val view = LayoutInflater
             .from(parent.context)
@@ -38,6 +35,10 @@ class WeatherAdapter: RecyclerView.Adapter<WeatherVH>() {
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: WeatherVH, position: Int) {
+        gmt = apiResponseData.timezone_offset/60/60
+        if (gmt>0)
+            dataFormat.timeZone = TimeZone.getTimeZone("GMT+${gmt}")
+        else dataFormat.timeZone = TimeZone.getTimeZone("GMT${gmt}")
         if (time == Time.HOURS) {
             holder.dataText.text = dataFormat.format(weatherData[position].data_time * 1000L)
             holder.tempView.text = weatherData[position].temp.toString() + " \u2103"
@@ -86,6 +87,7 @@ class WeatherAdapter: RecyclerView.Adapter<WeatherVH>() {
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(data: ApiResponse){
+        apiResponseData = data
         weatherData = data.hourly
         weatherDaysData = data.daily
         notifyDataSetChanged()

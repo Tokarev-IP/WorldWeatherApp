@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import test.app.weather.api.ApiClientObject
 import test.app.weather.api.ApiResponse
 import test.app.weather.api.data.CityData
 import test.app.weather.api.data.CityDescription
@@ -40,9 +39,6 @@ class WeatherViewModel: ViewModel() {
             try {
                 val data = weatherRep.getDataFromApi(lat,lon)
                 weatherData.postValue(data)
-
-                Log.d("API", data.toString())
-                Log.d("API", data.hourly.size.toString())
 
             } catch (e: Throwable){
                 Log.e("API", e.toString())

@@ -4,7 +4,6 @@
     <string name="today">TODAY</string>
     <string name="week">WEEK</string>
     <string-array name="cities">
-        <item>My location</item>
         <item>Moscow</item>
         <item>Kaliningrad</item>
         <item>Samara</item>
@@ -30,5 +29,6 @@
         <item>Vancouver</item>
         <item>Sao Paulo</item>
         <item>Buenos Aires</item>
+        <item>My location</item>
     </string-array>
 </resources>

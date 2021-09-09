@@ -14,15 +14,6 @@ data class SnowWaitingTimeData(
     var one_hour: Float,
 )
 
-data class MinutelyData(
-
-    @SerializedName("dt")
-    var data_time: Int,
-
-    @SerializedName("precipitation")
-    var precipitation: Float,
-)
-
 data class DailyTempData(
 
     @SerializedName("day")

@@ -2,13 +2,9 @@ package test.app.weather.mvvm
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,24 +12,21 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.location.LocationManagerCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.squareup.picasso.Picasso
-import org.w3c.dom.Text
-import test.app.weather.MyApplication
 import test.app.weather.R
 import test.app.weather.api.data.CityData
 import test.app.weather.api.data.Time
 import test.app.weather.recycler.WeatherAdapter
-import test.app.weather.recycler.WeatherVH
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.properties.Delegates
+
 
 class WeatherFragment : Fragment() {
 
@@ -41,6 +34,7 @@ class WeatherFragment : Fragment() {
     private val dataFormat = SimpleDateFormat("HH:mm")
     private lateinit var citiesList: LinkedList<CityData>
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    var gmt by Delegates.notNull<Int>()
 
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onCreateView(
@@ -48,28 +42,29 @@ class WeatherFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        val weatherViewModel by lazy { ViewModelProvider(this).get(WeatherViewModel::class.java) }
+        citiesList = weatherViewModel.setCities()
+
         checkPermisson()
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context as AppCompatActivity)
-
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location->
-                if (location == null) {
-                    Log.d("LOCATION", "null")
-                }
-                if (location != null) {
-                    Log.d("LOCATION", location.latitude.toString())
-                }
-            }
-
-
         if (ContextCompat.checkSelfPermission(
                 context as AppCompatActivity,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-//            fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
-//                Log.d("LOCATION", task.result.latitude.toString())
-            }
+            ) == PackageManager.PERMISSION_GRANTED) {
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(context as AppCompatActivity)
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                    if (location == null) {
+                        Toast.makeText(context as AppCompatActivity, "NO LOCATION", Toast.LENGTH_LONG).show()
+                    }
+                    if (location != null ) {
+                        Toast.makeText(context as AppCompatActivity, "LOCATION IS SET", Toast.LENGTH_LONG).show()
+                        Log.d("LOCATION", location.latitude.toString())
+                        Log.d("LOCATION", location.longitude.toString())
+                        citiesList.addLast(CityData("MY",location.latitude.toFloat() , location.longitude.toFloat(),"GMT+0"))
+                        weatherViewModel.getData(citiesList[0].lat, citiesList[0].lot)
+                    }
+                }
+        }else citiesList.addLast(CityData("NO",1000F , 1000F,"GMT+0"))
 
         val weatherInflater = inflater.inflate(R.layout.fragment_weather, container, false)
 
@@ -89,16 +84,10 @@ class WeatherFragment : Fragment() {
 
         val citySpinner: Spinner = weatherInflater.findViewById(R.id.city_spinner)
 
-        val weatherViewModel by lazy { ViewModelProvider(this).get(WeatherViewModel::class.java) }
-
         val weatherRecycler: RecyclerView = weatherInflater.findViewById(R.id.weather_recyclerView)
         val weatherAdapter = WeatherAdapter()
         weatherRecycler.layoutManager = LinearLayoutManager(context as AppCompatActivity)
         weatherRecycler.adapter = weatherAdapter
-
-        citiesList = weatherViewModel.setCities()
-        citiesList.addFirst(CityData("Moscow",55.75F , 37.62F,"GMT+3"))
-        hoursDaysTextView.text = "TODAY"
 
         hoursButton.setOnClickListener {
             weatherRecycler.adapter = weatherAdapter
@@ -113,12 +102,16 @@ class WeatherFragment : Fragment() {
             hoursDaysTextView.text = "WEEK"
         }
 
-        dataFormat.timeZone = TimeZone.getTimeZone("GMT+3")
-
-        weatherViewModel.getData(55.75F, 37.62F)
+        weatherViewModel.getData(citiesList[0].lat, citiesList[0].lot)
 
         weatherViewModel.getWeatherData().observe(viewLifecycleOwner, {
             weatherAdapter.setData(it)
+            hoursDaysTextView.text = "TODAY"
+
+            gmt = it.timezone_offset/60/60
+            if (gmt>0)
+                dataFormat.timeZone = TimeZone.getTimeZone("GMT+${gmt}")
+            else dataFormat.timeZone = TimeZone.getTimeZone("GMT${gmt}")
 
             cityTextView.text = it.timezone
             timeTextView.text = "local time: "+dataFormat.format(it.current.data_time*1000L)
@@ -143,20 +136,57 @@ class WeatherFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
+                if (ContextCompat.checkSelfPermission(
+                        context as AppCompatActivity,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED) {
+                        if (citiesList.last.name == "NO") {
+                            fusedLocationClient =
+                                LocationServices.getFusedLocationProviderClient(context as AppCompatActivity)
+                            fusedLocationClient.lastLocation
+                                .addOnSuccessListener { location ->
+                                    citiesList.removeLast()
+                                    citiesList.addLast(
+                                        CityData(
+                                            "MY",
+                                            location.latitude.toFloat(),
+                                            location.longitude.toFloat(),
+                                            "GMT+0"
+                                        )
+                                    )
+                                    weatherViewModel.getData(citiesList[position].lat, citiesList[position].lot)
+                                    dataFormat.timeZone = TimeZone.getTimeZone(citiesList[position].gmt)
+                                }
+                        }
+                } else {
+                    checkPermisson()
+                }
                 weatherViewModel.getData(citiesList[position].lat, citiesList[position].lot)
                 dataFormat.timeZone = TimeZone.getTimeZone(citiesList[position].gmt)
 
             }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
         return weatherInflater
     }
 
-    fun checkPermisson(){
+    private fun setLocation(){
+        if (ContextCompat.checkSelfPermission(
+                context as AppCompatActivity,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationClient =
+                LocationServices.getFusedLocationProviderClient(context as AppCompatActivity)
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                    citiesList.addLast(CityData("MY",location.latitude.toFloat() , location.longitude.toFloat() ,"GMT+0"))
+                }
+        }
+    }
+
+    private fun checkPermisson(){
         if (ContextCompat.checkSelfPermission(
                 context as AppCompatActivity,
                 Manifest.permission.ACCESS_FINE_LOCATION

@@ -20,15 +20,10 @@ data class ApiResponse(
     @SerializedName("current")
     var current: CurrentData,
 
-//    @SerializedName("minutely")
-//    var minutely: List<MinutelyData>,
-
     @SerializedName("hourly")
     var hourly: List<HourlyData>,
 
     @SerializedName("daily")
     var daily: List<DailyData>,
 
-//    @SerializedName("alerts")
-//    var alerts: List<AlertsData>,
 )

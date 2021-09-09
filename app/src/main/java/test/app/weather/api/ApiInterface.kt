@@ -6,8 +6,6 @@ import retrofit2.http.Query
 
 interface ApiInterface {
 
-    //https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=minutely&appid=1b916d803de90495c5dba70b809a0aee
-
     @GET("data/2.5/onecall?")
     suspend fun getWeatherInCity(
         @Query("lat") lat: Float,

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/week_weather_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/time_textView_recycler_week"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/purple_700"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/exp_recycler_image_view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/temp_morning_textView_recycler_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/purple_500"
+        app:layout_constraintEnd_toStartOf="@id/exp_recycler_image_view"
+        app:layout_constraintTop_toBottomOf="@id/time_textView_recycler_week" />
+
+    <TextView
+        android:id="@+id/temp_day_textView_recycler_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/purple_500"
+        app:layout_constraintEnd_toStartOf="@id/exp_recycler_image_view"
+        app:layout_constraintTop_toBottomOf="@id/temp_morning_textView_recycler_week" />
+
+    <TextView
+        android:id="@+id/temp_evening_textView_recycler_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/purple_500"
+        app:layout_constraintEnd_toStartOf="@id/exp_recycler_image_view"
+        app:layout_constraintTop_toBottomOf="@id/temp_day_textView_recycler_week" />
+
+    <TextView
+        android:id="@+id/temp_night_textView_recycler_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/purple_500"
+        app:layout_constraintEnd_toStartOf="@id/exp_recycler_image_view"
+        app:layout_constraintTop_toBottomOf="@id/temp_evening_textView_recycler_week" />
+
+    <ImageView
+        android:id="@+id/weather_image_recycler_week"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time_textView_recycler_week" />
+
+    <ImageView
+        android:id="@+id/exp_recycler_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_arrow_drop_down_40_orange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

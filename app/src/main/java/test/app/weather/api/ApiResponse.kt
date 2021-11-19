@@ -1,7 +1,8 @@
 package test.app.weather.api
 
 import com.google.gson.annotations.SerializedName
-import test.app.weather.api.data.*
+import test.app.weather.api.api.data.DailyData
+import test.app.weather.api.api.data.HourlyData
 
 data class ApiResponse(
 
@@ -17,13 +18,10 @@ data class ApiResponse(
     @SerializedName("timezone_offset")
     var timezone_offset: Int,
 
-    @SerializedName("current")
-    var current: CurrentData,
-
     @SerializedName("hourly")
     var hourly: List<HourlyData>,
 
     @SerializedName("daily")
     var daily: List<DailyData>,
 
-)
+    )

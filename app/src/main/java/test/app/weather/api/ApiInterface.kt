@@ -1,8 +1,8 @@
 package test.app.weather.api
 
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
+import test.app.weather.api.api.data.SearchCityData
 
 interface ApiInterface {
 
@@ -14,4 +14,10 @@ interface ApiInterface {
         @Query("exclude") part: String,
         @Query("appid") key: String,
     ): ApiResponse
+
+    @GET("data/2.5/weather?")
+    suspend fun getCityCoordinates(
+        @Query("q") name: String,
+        @Query("appid") key: String,
+    ): SearchCityData
 }

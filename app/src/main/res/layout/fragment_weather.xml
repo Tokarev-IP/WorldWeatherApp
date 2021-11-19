@@ -1,164 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".mvvm.WeatherFragment"
-    android:orientation="vertical"
-    >
+    tools:context=".fragments.WeatherFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:background="@color/purple_600"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            app:layout_scrollFlags="scroll|snap"
-            android:layout_marginBottom="5dp"
-            android:paddingHorizontal="10dp"
-            >
-
-            <Button
-                android:id="@+id/hour_button"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:text="@string/today"
-                android:backgroundTint="@color/purple_500"
-                android:layout_marginEnd="10dp"
-                />
-
-            <Button
-                android:id="@+id/day_button"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:text="@string/week"
-                android:backgroundTint="@color/purple_500"
-                android:layout_marginEnd="10dp"
-                />
-
-            <Spinner
-                android:id="@+id/city_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:backgroundTint="@color/purple_700"
-                android:entries="@array/cities"
-                />
-
-        </LinearLayout>
-        
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/city_name_text_view"
+            android:layout_width="330dp"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="10dp"
-            android:background="@color/white"
-            app:layout_scrollFlags="scroll|snap"
-            >
-            
-            <TextView
-                android:id="@+id/city_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                />
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/time_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/city_textView"
-                />
-
-            <TextView
-                android:id="@+id/sunrise_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/humidity_textView"
-                />
-
-            <TextView
-                android:id="@+id/sunset_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sunrise_textView"
-                />
-
-            <TextView
-                android:id="@+id/temp_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/time_textView"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                />
-
-            <TextView
-                android:id="@+id/feelsLike_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/temp_textView"
-                />
-
-            <ImageView
-                android:id="@+id/weather_imageView"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="100dp"
-                />
-
-            <TextView
-                android:id="@+id/windSpeed_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/feelsLike_textView"
-                />
-
-            <TextView
-                android:id="@+id/humidity_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/windSpeed_textView"
-                />
-
-            <TextView
-                android:id="@+id/hours_days_textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sunset_textView"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:gravity="center_horizontal"
-                />
+        <ImageButton
+            android:id="@+id/change_city_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/ic_baseline_view_list_35" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
 
-    </com.google.android.material.appbar.AppBarLayout>
-        
-        <androidx.recyclerview.widget.RecyclerView 
-            android:id="@+id/weather_recyclerView" 
-            android:layout_width="match_parent" 
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            />
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:paddingBottom="10dp"
+        android:scrollbarSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tool_bar" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
